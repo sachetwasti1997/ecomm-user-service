@@ -1,30 +1,35 @@
 package com.sachet.userservice.controller;
 
+import com.sachet.userservice.exception.UserNotFoundException;
+import com.sachet.userservice.model.LoginRequest;
+import com.sachet.userservice.model.SignUpRequest;
 import com.sachet.userservice.model.User;
 import com.sachet.userservice.service.JwtService;
+import com.sachet.userservice.service.UserAuthenticationService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/user")
 public class UserController {
 
     private final JwtService jwtService;
+    private final UserAuthenticationService userAuthenticationService;
 
-    public UserController(JwtService jwtService) {
+    public UserController(JwtService jwtService, UserAuthenticationService userAuthenticationService) {
         this.jwtService = jwtService;
+        this.userAuthenticationService = userAuthenticationService;
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login() {
-        User user = new User();
-        user.setEmail("sa@gmail.com");
-        user.setPassword("wasti");
-        String token = jwtService.generateToken(user);
-        return ResponseEntity.ok(token);
+    public ResponseEntity<String> login(@RequestBody @Valid LoginRequest loginRequest) throws UserNotFoundException {
+        return ResponseEntity.ok(userAuthenticationService.login(loginRequest));
+    }
+
+    @PostMapping("/signup")
+    public ResponseEntity<String> signup(@RequestBody @Valid SignUpRequest user) throws UserNotFoundException {
+        return ResponseEntity.ok(userAuthenticationService.registerUser(user));
     }
 
     @GetMapping("/test-auth")

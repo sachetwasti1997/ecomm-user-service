@@ -7,6 +7,7 @@ import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
@@ -21,7 +22,10 @@ public class JwtService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JwtService.class);
 
-    private final String SECRET_KEY = "abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    @Value("${user.config.secret_key}")
+    private String SECRET_KEY;
+    @Value("${user.config.token_expiration}")
+    private long tokenExpiration;
     private SecretKey key;
 
     @PostConstruct
@@ -65,7 +69,7 @@ public class JwtService {
                 .subject(userModel.getEmail())
                 .claim("roles", userModel.getRoles())
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
+                .expiration(new Date(System.currentTimeMillis() + tokenExpiration))
                 .signWith(key).compact();
     }
 
