@@ -22,3 +22,12 @@ user.config:
     maxLifeTime: 1800000
     maxPoolSize: 5
     poolName: product-db
+  kafkaConfiguration:
+    bootstrapServers: localhost:9092,localhost:9093,localhost:9094
+    consumerGroup: user-notifications-consumer
+    key-serializer: org.apache.kafka.common.serialization.StringSerializer
+    value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    topics:
+      user-add-product: "user-add-product"
+      user-buy-product: "user-buy-product"
+      user-cancel-product: "user-cancel-product"

@@ -3,7 +3,6 @@ package com.sachet.userservice.controller;
 import com.sachet.userservice.exception.UserNotFoundException;
 import com.sachet.userservice.model.LoginRequest;
 import com.sachet.userservice.model.SignUpRequest;
-import com.sachet.userservice.model.User;
 import com.sachet.userservice.service.JwtService;
 import com.sachet.userservice.service.UserAuthenticationService;
 import jakarta.validation.Valid;
@@ -12,12 +11,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/user")
-public class UserController {
+public class UserAuthenticationController {
 
     private final JwtService jwtService;
     private final UserAuthenticationService userAuthenticationService;
 
-    public UserController(JwtService jwtService, UserAuthenticationService userAuthenticationService) {
+    public UserAuthenticationController(JwtService jwtService, UserAuthenticationService userAuthenticationService) {
         this.jwtService = jwtService;
         this.userAuthenticationService = userAuthenticationService;
     }
