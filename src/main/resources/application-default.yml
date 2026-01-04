@@ -20,7 +20,7 @@ user.config:
   productCallCron: 0 */1 * * * ?
   databaseConfiguration:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://mysql:3306/ecommuser
+    url: jdbc:mysql://mysql-0.mysql.default.svc.cluster.local:3306/ecommuser
     userName: root
     password: hawking101@
     connectionTimeOut: 50000
