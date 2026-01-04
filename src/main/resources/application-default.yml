@@ -1,0 +1,38 @@
+server:
+  port: 8080
+
+#spring:
+#  jpa:
+#    hibernate.dialect: org.hibernate.dialect.MySQL8Dialect
+#  kafka:
+#    producer:
+#      bootstrap-servers: localhost:9092,localhost:9093,localhost:9094
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+user.config:
+  profile: default
+  secret_key: eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzYUBnbWFpbC5jb20iLCJpYXQiOjE3NjY5MDgxMTAsImV4cCI6MTc2Njk0NDExMH0.cgcGILCZiiDcA5YBEkqCVPubeBDzapulT32NKHX8afK98W1Sn2w9rkNSPJ5pjTKC
+  token_expiration: 36000000
+  serverUrl: https://dummyjson.com/products
+  skipStart: 0
+  skipLimit: 194
+  productCallCron: 0 */1 * * * ?
+  databaseConfiguration:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://mysql:3306/ecommuser
+    userName: root
+    password: hawking101@
+    connectionTimeOut: 50000
+    maxLifeTime: 1800000
+    maxPoolSize: 5
+    poolName: user-db
+  kafkaConfiguration:
+    bootstrapServers: kafka-svc:9092,kafka-svc:9093
+    consumerGroup: user-notifications-consumer
+    key-serializer: org.apache.kafka.common.serialization.StringSerializer
+    value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    topics:
+      user-add-product: "user-add-product"
+      user-buy-product: "user-buy-product"
+      user-cancel-product: "user-cancel-product"

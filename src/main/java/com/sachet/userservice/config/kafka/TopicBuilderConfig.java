@@ -12,8 +12,8 @@ public class TopicBuilderConfig {
     public NewTopic createProductAddTopic() {
         return TopicBuilder
                 .name("user-product-add")
-                .partitions(3)
-                .replicas(3)
+                .partitions(1)
+                .replicas(1)
                 .build();
     }
 
@@ -21,8 +21,8 @@ public class TopicBuilderConfig {
     public NewTopic createProductBuyTopic() {
         return TopicBuilder
                 .name("user-product-buy")
-                .partitions(3)
-                .replicas(3)
+                .partitions(1)
+                .replicas(1)
                 .build();
     }
 

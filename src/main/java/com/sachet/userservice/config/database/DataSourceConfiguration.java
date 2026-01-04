@@ -5,6 +5,7 @@ import com.sachet.userservice.config.EnvironmentConfiguration;
 import com.sachet.userservice.config.model.DatabaseConfiguration;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

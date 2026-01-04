@@ -26,7 +26,7 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public ProducerFactory<String, String> producerFactory(EnvironmentConfiguration environmentConfiguration) {
+    public ProducerFactory<String, String> producerFactory(@Autowired EnvironmentConfiguration environmentConfiguration) {
         return new DefaultKafkaProducerFactory<>(producerConfig(environmentConfiguration));
     }
 

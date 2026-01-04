@@ -1,18 +1,23 @@
 server:
   port: 8080
 
-spring:
-  jpa:
-    hibernate.dialect: org.hibernate.dialect.MySQL8Dialect
+#spring:
+#  jpa:
+#    hibernate.dialect: org.hibernate.dialect.MySQL8Dialect
+#  kafka:
+#    producer:
+#      bootstrap-servers: localhost:9092,localhost:9093,localhost:9094
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
 user.config:
-  profile: default
+  profile: dev
   secret_key: eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzYUBnbWFpbC5jb20iLCJpYXQiOjE3NjY5MDgxMTAsImV4cCI6MTc2Njk0NDExMH0.cgcGILCZiiDcA5YBEkqCVPubeBDzapulT32NKHX8afK98W1Sn2w9rkNSPJ5pjTKC
   token_expiration: 36000000
-#  serverUrl: https://dummyjson.com/products
-#  skipStart: 0
-#  skipLimit: 194
-#  productCallCron: 0 */1 * * * ?
+  #  serverUrl: https://dummyjson.com/products
+  #  skipStart: 0
+  #  skipLimit: 194
+  #  productCallCron: 0 */1 * * * ?
   databaseConfiguration:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/ecommuser

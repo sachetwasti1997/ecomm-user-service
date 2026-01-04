@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 @Setter
 @ConfigurationProperties(prefix = "user.config")
 public class EnvironmentConfiguration {
+    private String profile;
+    private String serverUrl;
     private DatabaseConfiguration databaseConfiguration;
     private KafkaConfiguration kafkaConfiguration;
 }
