@@ -9,6 +9,12 @@ server:
 #      bootstrap-servers: localhost:9092,localhost:9093,localhost:9094
 #      key-serializer: org.apache.kafka.common.serialization.StringSerializer
 #      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+spring:
+  kafka:
+    producer:
+      bootstrap-servers: kafka-broker-0:9092,kafka-broker-1:9093,kafka-broker-2:9094
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
 user.config:
   profile: default
