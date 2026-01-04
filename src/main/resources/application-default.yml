@@ -21,14 +21,14 @@ user.config:
   databaseConfiguration:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://mysql-0.mysql.default.svc.cluster.local:3306/ecommuser
-    userName: root
+    userName: sachet
     password: hawking101@
     connectionTimeOut: 50000
     maxLifeTime: 1800000
     maxPoolSize: 5
     poolName: user-db
   kafkaConfiguration:
-    bootstrapServers: kafka-svc:9092,kafka-svc:9093
+    bootstrapServers: kafka-0.kafka-svc.default.svc.cluster.local:9093, kafka-1.kafka-svc.default.svc.cluster.local:9093, kafka-2.kafka-svc.default.svc.cluster.local:9093
     consumerGroup: user-notifications-consumer
     key-serializer: org.apache.kafka.common.serialization.StringSerializer
     value-serializer: org.apache.kafka.common.serialization.StringSerializer
