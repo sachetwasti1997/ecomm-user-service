@@ -28,7 +28,7 @@ user.config:
     maxPoolSize: 5
     poolName: user-db
   kafkaConfiguration:
-    bootstrapServers: kafka-0.kafka-svc.default.svc.cluster.local:9093, kafka-1.kafka-svc.default.svc.cluster.local:9093, kafka-2.kafka-svc.default.svc.cluster.local:9093
+    bootstrapServers: kafka-broker-0:9092,kafka-broker-1:9093,kafka-broker-2:9094
     consumerGroup: user-notifications-consumer
     key-serializer: org.apache.kafka.common.serialization.StringSerializer
     value-serializer: org.apache.kafka.common.serialization.StringSerializer
