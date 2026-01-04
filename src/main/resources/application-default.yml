@@ -12,10 +12,10 @@ server:
 spring:
   kafka:
     producer:
-      bootstrap-servers: kafka-broker-0:9092,kafka-broker-1:9093,kafka-broker-2:9094
+      bootstrap-servers: kafka-broker-1:9092,kafka-broker-2:9093,kafka-broker-3:9094
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
-    bootstrap-servers: kafka-broker-0:9092,kafka-broker-1:9093,kafka-broker-2:9094
+    bootstrap-servers: kafka-broker-1:9092,kafka-broker-2:9093,kafka-broker-3:9094
 
 user.config:
   profile: default
