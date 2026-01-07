@@ -2,6 +2,7 @@ package com.sachet.userservice.model;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,5 +25,6 @@ public class SignUpRequest {
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{4,12}$",
             message = "Password must be min 4 and max 12 length containing at least 1 uppercase, 1 lowercase, 1 special character, and 1 digit")
     private String password;
+    @NotNull(message = "Please select a user role")
     private Roles roles;
 }

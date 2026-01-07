@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/user")
+@CrossOrigin("*")
 public class UserAuthenticationController {
 
     private final JwtService jwtService;
