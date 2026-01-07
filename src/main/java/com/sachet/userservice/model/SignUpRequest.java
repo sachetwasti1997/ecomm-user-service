@@ -6,7 +6,6 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
 
 @Getter
 @Setter
@@ -25,5 +24,5 @@ public class SignUpRequest {
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{4,12}$",
             message = "Password must be min 4 and max 12 length containing at least 1 uppercase, 1 lowercase, 1 special character, and 1 digit")
     private String password;
-    private List<String> roles;
+    private Roles roles;
 }

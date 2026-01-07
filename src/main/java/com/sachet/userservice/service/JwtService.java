@@ -14,6 +14,7 @@ import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -67,7 +68,7 @@ public class JwtService {
         return Jwts.builder()
                 .claims(claims)
                 .subject(userModel.getEmail())
-                .claim("roles", userModel.getRoles())
+                .claim("roles", List.of(userModel.getRoles()))
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + tokenExpiration))
                 .signWith(key).compact();

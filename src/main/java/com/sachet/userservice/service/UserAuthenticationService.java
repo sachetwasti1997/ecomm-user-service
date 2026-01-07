@@ -2,8 +2,10 @@ package com.sachet.userservice.service;
 
 import com.sachet.userservice.exception.UserNotFoundException;
 import com.sachet.userservice.model.LoginRequest;
+import com.sachet.userservice.model.Roles;
 import com.sachet.userservice.model.SignUpRequest;
 import com.sachet.userservice.model.User;
+import com.sachet.userservice.repo.RoleRepository;
 import com.sachet.userservice.repo.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,13 +15,16 @@ import tools.jackson.databind.ObjectMapper;
 public class UserAuthenticationService {
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final JwtService jwtService;
     private final ObjectMapper objectMapper;
 
-    public UserAuthenticationService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder,
+    public UserAuthenticationService(UserRepository userRepository, RoleRepository roleRepository,
+                                     BCryptPasswordEncoder bCryptPasswordEncoder,
                                      JwtService jwtService) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.jwtService = jwtService;
         this.objectMapper = new ObjectMapper();;
@@ -28,6 +33,13 @@ public class UserAuthenticationService {
     public String registerUser(SignUpRequest signUpRequest) {
         User user = objectMapper.convertValue(signUpRequest, User.class);
         user.setPassword(bCryptPasswordEncoder.encode(signUpRequest.getPassword()));
+        Roles role;
+        if (!roleRepository.existsRolesByUserRole(signUpRequest.getRoles().getUserRole())) {
+             role = roleRepository.save(signUpRequest.getRoles());
+        }else {
+            role = roleRepository.getRolesByUserRole(signUpRequest.getRoles().getUserRole()).get(0);
+        }
+        user.setRoles(role);
         User userSaved = userRepository.save(user);
         return "Successfully Registered User";
     }
