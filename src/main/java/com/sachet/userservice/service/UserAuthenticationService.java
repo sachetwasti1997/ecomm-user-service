@@ -55,4 +55,8 @@ public class UserAuthenticationService {
         }
         return jwtService.generateToken(user);
     }
+
+    public User getUser(String email) {
+        return userRepository.getUsersByEmail(email);
+    }
 }

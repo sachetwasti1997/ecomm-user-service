@@ -4,6 +4,7 @@ import com.sachet.userservice.service.JwtService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -37,6 +38,7 @@ public class JwtSecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         );
         http.exceptionHandling(ex -> ex.authenticationEntryPoint(authEntryPoint));
+        http.cors(Customizer.withDefaults());
         http.csrf(AbstractHttpConfigurer::disable);
         http.addFilterBefore(authTokenFilter, UsernamePasswordAuthenticationFilter.class);
         http.authenticationManager(securityManager);
@@ -48,5 +50,14 @@ public class JwtSecurityConfig {
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+//    @Bean
+//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//        http
+//                .cors(Customizer.withDefaults()) // Enable CORS
+//                // ... other security configurations like disabling csrf for state-less APIs
+//                .csrf(csrf -> csrf.disable());
+//        return http.build();
+//    }
 
 }

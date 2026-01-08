@@ -3,15 +3,19 @@ package com.sachet.userservice.controller;
 import com.sachet.userservice.exception.UserNotFoundException;
 import com.sachet.userservice.model.LoginRequest;
 import com.sachet.userservice.model.SignUpRequest;
+import com.sachet.userservice.model.User;
 import com.sachet.userservice.service.JwtService;
 import com.sachet.userservice.service.UserAuthenticationService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 @RestController
 @RequestMapping(value = "/user")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 public class UserAuthenticationController {
 
     private final JwtService jwtService;
@@ -32,9 +36,12 @@ public class UserAuthenticationController {
         return ResponseEntity.ok(userAuthenticationService.registerUser(user));
     }
 
-    @GetMapping("/test-auth")
-    public ResponseEntity<String> testAuth() {
-        return ResponseEntity.ok("Successful");
+    @GetMapping("/fetch")
+    public ResponseEntity<User> fetchUser(Principal principal) {
+        if (principal != null) {
+            return ResponseEntity.ok(userAuthenticationService.getUser(principal.getName()));
+        }
+        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
 
 }
